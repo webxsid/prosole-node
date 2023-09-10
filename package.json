@@ -13,13 +13,11 @@
     "logger",
     "nodejs",
     "typescript",
-    "node-logger",
-    "webxsid"
+    "node-logger"
   ],
   "files": [
     "dist/**/*"
   ],
-  "type": "module",
   "scripts": {
     "build": "tsc",
     "dev": "tsc -w",

@@ -99,4 +99,4 @@ class logger {
   }
 }
 
-export default logger;
+export { logger as Logger };
