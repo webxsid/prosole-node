@@ -36,5 +36,8 @@
     "chalk": "^5.3.0",
     "dotenv": "^16.3.1",
     "socket.io-client": "^4.7.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
