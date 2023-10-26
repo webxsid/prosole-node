@@ -1,6 +1,6 @@
 {
-  "name": "@webxsid/node-logger",
-  "version": "1.0.0",
+  "name": "prosole",
+  "version": "0.0.1",
   "description": "An all in one logger for nodejs",
   "main": "./dist/bin/app.js",
   "types": "./dist/bin/app.d.ts",
