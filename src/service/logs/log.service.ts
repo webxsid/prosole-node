@@ -1,6 +1,6 @@
 import * as path from "path";
 import * as fs from "fs";
-import * as moment from "moment";
+import moment from "moment";
 import { io, Socket } from "socket.io-client";
 import {
   LogColors,
@@ -126,7 +126,7 @@ class LoggerService {
     }`;
     // colorize the level
     const colorizedLevel = colorize[level](
-      `[${project} | ${timestamp} | ${level.toUpperCase()} ]`
+      `[${project} | ${timestamp} | ${level.toUpperCase()}]`
     );
 
     // log to console

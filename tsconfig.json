@@ -7,7 +7,9 @@
     "strict": true,
     "baseUrl": "./",
     "incremental": true,
-    "tsBuildInfoFile": ".tsbuildinfo"
+    "tsBuildInfoFile": ".tsbuildinfo",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["./bin/**/*", "./src/**/*", "extendedConsole.d.ts"],
   "exclude": ["node_modules", "**/*.spec.ts", "dist"]
