@@ -1,20 +1,10 @@
-import { LoggerConfig } from "../interfaces/logger_config.interface";
-import { LoggerLevel, LoggerTransport } from "../enums/logger_config.enum";
+import { Logger } from "../interfaces";
+import { LogTransports } from "../enums";
 
-const config: LoggerConfig = {
-  development: {
-    transport: LoggerTransport.CONSOLE,
-    exitOnError: true,
-  },
-  production: {
-    transport: null,
-    exitOnError: false,
-  },
-  envIdentifier: {
-    key: "NODE_ENV",
-    development: "development",
-    production: "production",
-  },
+const config: Logger = {
+  transport: LogTransports.CONSOLE,
+  env: "development",
+  extendConsole: false,
   project: {
     name: "Logger",
     version: "1.0.0",

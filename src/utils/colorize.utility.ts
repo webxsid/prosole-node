@@ -1,18 +1,10 @@
-import { LoggerColors } from "../enums/logger_config.enum";
+import { LogColors } from "../enums";
 
 export const colorize = {
-  red: (message: string) =>
-    `${LoggerColors.RED}${message}${LoggerColors.RESET}`,
-  green: (message: string) =>
-    `${LoggerColors.GREEN}${message}${LoggerColors.RESET}`,
-  yellow: (message: string) =>
-    `${LoggerColors.YELLOW}${message}${LoggerColors.RESET}`,
-  blue: (message: string) =>
-    `${LoggerColors.BLUE}${message}${LoggerColors.RESET}`,
-  magenta: (message: string) =>
-    `${LoggerColors.MAGENTA}${message}${LoggerColors.RESET}`,
-  cyan: (message: string) =>
-    `${LoggerColors.CYAN}${message}${LoggerColors.RESET}`,
-  white: (message: string) =>
-    `${LoggerColors.WHITE}${message}${LoggerColors.RESET}`,
+  error: (message: string) => `${LogColors.error}${message}${LogColors.reset}`,
+  success: (message: string) =>
+    `${LogColors.success}${message}${LogColors.reset}`,
+  warn: (message: string) => `${LogColors.warn}${message}${LogColors.reset}`,
+  info: (message: string) => `${LogColors.info}${message}${LogColors.reset}`,
+  log: (message: string) => `${LogColors.log}${message}${LogColors.reset}`,
 };

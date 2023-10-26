@@ -5,3 +5,5 @@
 /dist
 /logs
 /test
+/src/config/urls.config.ts
+/configs
