@@ -2,6 +2,10 @@
   "name": "prosole",
   "version": "0.0.1",
   "description": "An all in one logger for nodejs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sm2101/prosole-node"
+  },
   "main": "./dist/bin/app.js",
   "types": "./dist/bin/app.d.ts",
   "author": "Siddharth Mittal<hello@webxsid.com>",
