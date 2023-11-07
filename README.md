@@ -139,6 +139,15 @@ These simple examples demonstrate how to use Prosole for logging and alerting in
 
 For more detailed usage examples and additional features, please refer to the documentation or code samples provided in the repository.
 
+## Usage with Slack and Discord Bots
+
+If you use Slack or Discord for team communication and collaboration, Prosole offers bots for these platforms. You can integrate these bots to enhance your logging and alerting experience:
+
+- **[Prosole Slack Bot Documentation](https://github.com/sm2101/prosole/blob/main/Prosole-Slack-Bot.md)**
+- **[Prosole Discord Bot Documentation](https://github.com/sm2101/prosole/blob/main/Documentation/Bots/DiscordBot.md)**
+
+These bots simplify the process of receiving logs and alerts directly within your team communication.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
