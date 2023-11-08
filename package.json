@@ -1,6 +1,6 @@
 {
   "name": "prosole",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "An all in one logger for nodejs",
   "repository": {
     "type": "git",
@@ -23,10 +23,8 @@
     "dist/**/*"
   ],
   "scripts": {
-    "build:dev": "node ./scripts/pre-build.js dev && tsc",
-    "build:test": "node ./scripts/pre-build.js test && tsc",
-    "build": "node ./scripts/pre-build.js prod && tsc",
-    "dev": "node ./scripts/pre-build.js dev && tsc -w",
+    "build": "tsc",
+    "dev": "tsc -w",
     "prepare": "npm run build",
     "lint": "tslint -c tslint.json -p tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -39,9 +37,6 @@
   },
   "dependencies": {
     "axios": "^1.5.0",
-    "chalk": "^5.3.0",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
     "moment": "^2.29.4",
     "socket.io-client": "^4.7.2"
   },

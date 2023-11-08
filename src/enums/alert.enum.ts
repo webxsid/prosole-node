@@ -6,7 +6,6 @@ enum AlertLevels {
 }
 
 enum AlertTransports {
-  DISCORD = "discord",
   SLACK = "slack",
   HTTP = "http",
 }

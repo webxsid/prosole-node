@@ -4,7 +4,6 @@ import { Alert } from "../../interfaces";
 import { AlertLevels, AlertTransports } from "../../enums";
 import { colorize } from "../../utils";
 import AlertVerification from "./verification.service";
-import { webhookUrl } from "../../config/urls.config";
 
 class AlertService {
   private activeTransport: AlertTransports | null;
@@ -15,8 +14,22 @@ class AlertService {
     this.activeTransport = this.config.transport;
 
     this.httpTransport = this.httpTransport.bind(this);
-    this.discordTransport = this.discordTransport.bind(this);
     this.slackTransport = this.slackTransport.bind(this);
+  }
+
+  private getSlackColor(type: AlertLevels): string {
+    switch (type) {
+      case AlertLevels.INFO:
+        return "#3498db";
+      case AlertLevels.SUCCESS:
+        return "#2ecc71";
+      case AlertLevels.WARN:
+        return "#f1c40f";
+      case AlertLevels.ERROR:
+        return "#e74c3c";
+      default:
+        return "#3498db";
+    }
   }
 
   public alert(
@@ -28,9 +41,6 @@ class AlertService {
     switch (this.activeTransport) {
       case AlertTransports.HTTP:
         this.httpTransport(type, message);
-        break;
-      case AlertTransports.DISCORD:
-        this.discordTransport(type, message, channel!, extraData);
         break;
       case AlertTransports.SLACK:
         this.slackTransport(type, message, channel!, extraData);
@@ -68,52 +78,74 @@ class AlertService {
     });
   }
 
-  private discordTransport(
-    type: AlertLevels,
-    message: string,
-    channel: string,
-    embeds?: any[]
-  ): void {
-    const token = this.config.discord!.channels[channel];
-    if (!token) {
-      console.log(
-        colorize.warn(`Channel ${channel} is not defined in discord config`)
-      );
-      return;
-    }
-    axios.post(`${webhookUrl}/discord/${token}`, {
-      level: type,
-      project: this.config.project,
-      environment: this.config.environment,
-      data: {
-        text: message,
-        ...(embeds && { embeds }),
-      },
-    });
-  }
-
   private slackTransport(
     type: AlertLevels,
     message: string,
     channel: string,
     attachments?: any[]
   ): void {
-    const token = this.config.slack!.channels[channel];
-    if (!token) {
+    const url = this.config.slack!.channels[channel];
+    if (!url) {
       console.log(
         colorize.warn(`Channel ${channel} is not defined in slack config`)
       );
       return;
     }
-    axios.post(`${webhookUrl}/slack/${token}`, {
-      level: type,
-      project: this.config.project,
-      environment: this.config.environment,
-      data: {
-        text: message,
-        ...(attachments && { attachments }),
-      },
-    });
+
+    const color = this.getSlackColor(type);
+    let requestBody = {
+      username: "Prosole Alerts",
+      icon_url: "https://i.imgur.com/ZhULocfs.png",
+      text: `*[${type.toUpperCase()}]*\n${message}`,
+      attachments: [
+        {
+          color,
+          fields: [
+            {
+              title: "Project",
+              value: this.config.project.name,
+              short: true,
+            },
+            {
+              title: "Version",
+              value: this.config.project.version,
+              short: true,
+            },
+            {
+              title: "Environment",
+              value: this.config.environment,
+              short: true,
+            },
+            {
+              title: "Timestamp",
+              value: moment().format("YYYY-MM-DD HH:mm:ss"),
+              short: true,
+            },
+          ],
+        },
+      ],
+    };
+
+    if (attachments) {
+      requestBody.attachments.push(...attachments);
+    }
+
+    try {
+      axios.post(url, requestBody, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } catch (err) {
+      console.log(
+        colorize.error(
+          `Error sending slack alert to ${channel}, please check your slack config`
+        )
+      );
+      console.log(err);
+    }
+
+    return;
   }
 }
 

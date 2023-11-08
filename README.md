@@ -1,7 +1,6 @@
 # Prosole
 
 [![npm version](https://img.shields.io/npm/v/prosole.svg)](https://www.npmjs.com/package/prosole) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/sm2101prosole/blob/master/LICENSE)
-
 Prosole is an all-in-one logger and alerts utility designed for Node.js applications. It simplifies the process of logging information and generating alerts, making it an essential tool for developers looking to monitor, manage, and debug their Node.js projects.
 
 ## Features
@@ -9,20 +8,14 @@ Prosole is an all-in-one logger and alerts utility designed for Node.js applicat
 ### Logger Utility
 
 - **Transport Configuration**:
-
   - Specify one of three supported transports: console, file, or Socket.IO.
   - Logs are directed to the specified transport, allowing customization based on different environments.
-
 - **Custom Base Log Level**:
-
   - Set a base log level to filter log messages, allowing you to ignore messages below this level.
   - Log levels range from "Log" (lowest) to "Error" (highest).
-
 - **Selective Logging**:
-
   - Enable or disable logging by specifying a transport; no logs will be printed if no transport is specified.
   - This feature provides flexibility in managing logging for different scenarios and environments.
-
 - **Console Integration**:
   - Optionally extend the Node.js console object to seamlessly integrate logging features directly into it.
   - Note that this feature is turned off by default and may not be recommended for all use cases.
@@ -30,20 +23,14 @@ Prosole is an all-in-one logger and alerts utility designed for Node.js applicat
 ### Alert Utility
 
 - **Transport Configuration**:
-
   - Choose from multiple alert transports, including Discord, Slack, or custom HTTP requests.
   - Set up different transports for different environments.
-
 - **Selective Alerting**:
-
   - Define alerting behavior by specifying a transport; no alerts will be sent if no transport is specified.
   - This feature allows you to adapt alerting to your specific requirements and scenarios.
-
 - **Integration with Third-Party Platforms**:
-
-  - Send alert messages to third-party platforms like Discord and Slack for immediate notification.
+  - Send alert messages to third-party platforms like Slack for immediate notification.
   - Also, send HTTP requests to a custom server to facilitate alerting.
-
 - **Console Integration**:
   - Optionally extend the Node.js console object to seamlessly integrate alerting features directly into it.
   - Note that this feature is turned off by default and may not be suitable for all use cases.
@@ -109,15 +96,19 @@ alerts.init({
     name: "YourProjectName",
     version: "1.0.0",
   },
-  transport: "discord", // Choose your preferred alert transport ("discord", "slack", "http"or null to bypass )
+  transport: "slack", // Choose your preferred alert transport ("slack", "http" or null to bypass )
   environment: "development", // Set the environment context
-  discord: {
+  slack: {
     channels: {
-      "channel-name":<token from discord bot>
+      "channel-name":<webhook url>
     },
   },
 });
 ```
+
+### Getting the Slack Webhook URL
+
+To send alerts to Slack, you need to provide a webhook URL. You can get this URL by using the "incoming webhook" feature in Slack. Click [here](https://github.com/sm2101/prosole/blob/main/Documentation/Alerts/Slack.md) to see how to set up an incoming webhook in Slack.
 
 ### Actual Usage
 
@@ -129,24 +120,21 @@ Now that you have initialized the Logger and Alert Utility, you can start using 
 logger.error("This is an error",...<more data>);
 ```
 
-#### Sending an alert
+#### Sending an alert using Slack
 
 ```javascript
-alerts.error("This is an error alert", "<discord-channel>");
+alerts.error("This is an error alert", "<slack-channel>");
+```
+
+#### Sending an alert using HTTP
+
+```javascript
+alerts.error("This is an error alert");
 ```
 
 These simple examples demonstrate how to use Prosole for logging and alerting in your Node.js application. Customize the log and alert messages, as well as the destinations, to meet your specific needs.
 
 For more detailed usage examples and additional features, please refer to the documentation or code samples provided in the repository.
-
-## Usage with Slack and Discord Bots
-
-If you use Slack or Discord for team communication and collaboration, Prosole offers bots for these platforms. You can integrate these bots to enhance your logging and alerting experience:
-
-- **[Prosole Slack Bot Documentation](https://github.com/sm2101/prosole/blob/main/Prosole-Slack-Bot.md)**
-- **[Prosole Discord Bot Documentation](https://github.com/sm2101/prosole/blob/main/Documentation/Bots/DiscordBot.md)**
-
-These bots simplify the process of receiving logs and alerts directly within your team communication.
 
 ## License
 

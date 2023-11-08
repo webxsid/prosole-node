@@ -25,11 +25,9 @@ const alertLevels: {
 };
 
 const alertTransports: {
-  DISCORD: string;
   SLACK: string;
   HTTP: string;
 } = {
-  DISCORD: AlertTransports.DISCORD,
   SLACK: AlertTransports.SLACK,
   HTTP: AlertTransports.HTTP,
 };
