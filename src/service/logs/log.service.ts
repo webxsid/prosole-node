@@ -19,7 +19,7 @@ import {
 import LogVerification from "./verification.service";
 
 class LoggerService {
-  private activeTransport: LogTransports | null = null;
+  private activeTransport: string | null = null;
   private config: Logger;
   private socketIO?: Socket | null = null;
   constructor(config: Logger) {

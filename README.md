@@ -3,6 +3,11 @@
 [![npm version](https://img.shields.io/npm/v/prosole.svg)](https://www.npmjs.com/package/prosole) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/sm2101prosole/blob/master/LICENSE)
 Prosole is an all-in-one logger and alerts utility designed for Node.js applications. It simplifies the process of logging information and generating alerts, making it an essential tool for developers looking to monitor, manage, and debug their Node.js projects.
 
+## Change Log
+
+- v0.1.1
+  - Fixed Interface Issue with logger and alert initialization
+
 ## Features
 
 ### Logger Utility

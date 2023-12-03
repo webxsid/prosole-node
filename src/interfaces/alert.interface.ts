@@ -37,10 +37,10 @@ interface Alert {
     version?: string;
   };
   environment: string;
-  transport: AlertTransports | null;
+  transport: string | null;
   extendConsole?: boolean;
   slack?: SlackAlert;
-  discord?: DiscordAlert;
+  // discord?: DiscordAlert;
   http?: ApiAlert;
 }
 

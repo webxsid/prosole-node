@@ -6,7 +6,7 @@ import { colorize } from "../../utils";
 import AlertVerification from "./verification.service";
 
 class AlertService {
-  private activeTransport: AlertTransports | null;
+  private activeTransport: string | null;
   private config: Alert;
   constructor(config: Alert) {
     new AlertVerification(config).verify();
@@ -38,7 +38,7 @@ class AlertService {
     channel?: string,
     extraData?: any[]
   ): void {
-    switch (this.activeTransport) {
+    switch (this.activeTransport as AlertTransports) {
       case AlertTransports.HTTP:
         this.httpTransport(type, message);
         break;

@@ -56,7 +56,9 @@ class AlertVerification {
       return;
     }
 
-    if (!Object.values(AlertTransports).includes(transport)) {
+    if (
+      !Object.values(AlertTransports).includes(transport as AlertTransports)
+    ) {
       console.log(
         colorize.warn("Transport is not valid, no alerts will be sent")
       );

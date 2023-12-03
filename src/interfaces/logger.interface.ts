@@ -36,8 +36,8 @@ interface AlertSlack {
 
 interface Logger {
   project: Project;
-  transport: LogTransports | null;
-  baseLevel?: LogLevels;
+  transport: string | null;
+  baseLevel?: string;
   env: string;
   extendConsole?: boolean;
   file?: LogsFile;

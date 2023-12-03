@@ -43,7 +43,7 @@ class LogVerification {
       this.config.transport = null;
       return;
     }
-    if (!Object.values(LogTransports).includes(transport)) {
+    if (!Object.values(LogTransports).includes(transport as LogTransports)) {
       console.log(
         colorize.warn(
           `Transport ${transport} is not valid, defaulting back to console`
@@ -119,7 +119,7 @@ class LogVerification {
       this.config.baseLevel = LogLevels.LOG;
       return;
     }
-    if (!Object.values(LogLevels).includes(baseLevel)) {
+    if (!Object.values(LogLevels).includes(baseLevel as LogLevels)) {
       console.log(
         colorize.warn(`Base level ${baseLevel} is not valid, defaulting to LOG`)
       );
