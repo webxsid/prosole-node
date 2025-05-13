@@ -1,7 +1,7 @@
-import { Alert, ApiAlert, SlackAlert, DiscordAlert } from "../../interfaces";
-import { AlertTransports } from "../../enums";
-import { colorize } from "../../utils";
-import axios from "axios";
+import { Alert, ApiAlert, SlackAlert, DiscordAlert } from '../../interfaces';
+import { AlertTransports } from '../../enums';
+import { colorize } from '../../utils';
+import axios from 'axios';
 
 class AlertVerification {
   private config: Alert;
@@ -24,16 +24,16 @@ class AlertVerification {
   private verifyProject(): void {
     const { project } = this.config;
     if (!project) {
-      throw new Error("Project is required");
+      throw new Error('Project is required');
     }
     if (!project.name) {
-      throw new Error("Project name is required");
+      throw new Error('Project name is required');
     }
     if (!project.version) {
       console.log(
-        colorize.warn("Project version is not defined, defaulting to 1.0.0")
+        colorize.warn('Project version is not defined, defaulting to 1.0.0')
       );
-      this.config.project.version = "1.0.0";
+      this.config.project.version = '1.0.0';
     }
   }
 
@@ -41,9 +41,9 @@ class AlertVerification {
     const { environment } = this.config;
     if (!environment) {
       console.log(
-        colorize.warn("Environment is not defined, defaulting to development")
+        colorize.warn('Environment is not defined, defaulting to development')
       );
-      this.config.environment = "development";
+      this.config.environment = 'development';
     }
   }
 
@@ -51,7 +51,7 @@ class AlertVerification {
     const { transport } = this.config;
     if (!transport) {
       console.log(
-        colorize.info("Alert transport is set to null, no alerts will be sent")
+        colorize.info('Alert transport is set to null, no alerts will be sent')
       );
       return;
     }
@@ -60,7 +60,7 @@ class AlertVerification {
       !Object.values(AlertTransports).includes(transport as AlertTransports)
     ) {
       console.log(
-        colorize.warn("Transport is not valid, no alerts will be sent")
+        colorize.warn('Transport is not valid, no alerts will be sent')
       );
       return;
     }
@@ -74,7 +74,7 @@ class AlertVerification {
         break;
       default:
         console.log(
-          colorize.warn("Transport is not valid, no alerts will be sent")
+          colorize.warn('Transport is not valid, no alerts will be sent')
         );
         break;
     }
@@ -84,7 +84,7 @@ class AlertVerification {
     const { slack } = this.config;
     if (!slack) {
       console.log(
-        colorize.error("Slack transport is not defined, no alerts will be sent")
+        colorize.error('Slack transport is not defined, no alerts will be sent')
       );
       this.config.transport = null;
       return;
@@ -93,20 +93,22 @@ class AlertVerification {
     const { channels } = slack!;
     if (!channels) {
       console.log(
-        colorize.error("Slack channels are not defined, no alerts will be sent")
+        colorize.error('Slack channels are not defined, no alerts will be sent')
       );
       this.config.transport = null;
       return;
     }
 
-    //verify that slack channels have a valid url
+    // verify that slack channels have a valid url
     const verifiedChannels: {
       [key: string]: string;
     } = {};
-    for (let channel in channels) {
+
+    // tslint:disable-next-line:forin
+    for (const channel in channels) {
       const url = channels[channel];
-      //check if url is valid
-      if (!url.startsWith("https://hooks.slack.com/services/")) {
+      // check if the url is valid
+      if (!url.startsWith('https://hooks.slack.com/services/')) {
         console.log(
           colorize.error(
             `Slack channel ${channel} has an invalid url, no alerts will be sent`
@@ -124,7 +126,7 @@ class AlertVerification {
     const { http } = this.config;
     if (!http) {
       console.log(
-        colorize.error("Http transport is not defined, no alerts will be sent")
+        colorize.error('Http transport is not defined, no alerts will be sent')
       );
       this.config.transport = null;
       return;
@@ -133,7 +135,7 @@ class AlertVerification {
     const { alertUrl, healthCheck, body } = http!;
     if (!alertUrl) {
       console.log(
-        colorize.error("Http alertUrl is not defined, no alerts will be sent")
+        colorize.error('Http alertUrl is not defined, no alerts will be sent')
       );
       this.config.transport = null;
       return;
@@ -142,7 +144,7 @@ class AlertVerification {
     if (!healthCheck) {
       console.log(
         colorize.error(
-          "Http healthCheck is not defined, your alerts might not be sent"
+          'Http healthCheck is not defined, your alerts might not be sent'
         )
       );
       return;
@@ -156,7 +158,7 @@ class AlertVerification {
         if (data.status !== 200) {
           console.log(
             colorize.error(
-              "Http healthCheck failed, your alerts might not be sent"
+              'Http healthCheck failed, your alerts might not be sent'
             )
           );
           return;
@@ -164,7 +166,7 @@ class AlertVerification {
       } catch (error) {
         console.log(
           colorize.error(
-            "Http healthCheck failed, your alerts might not be sent"
+            'Http healthCheck failed, your alerts might not be sent'
           )
         );
         return;
@@ -174,13 +176,13 @@ class AlertVerification {
     if (!body) {
       console.log(
         colorize.info(
-          "Your api will receive a default body, you can change this in the config"
+          'Your api will receive a default body, you can change this in the config'
         ),
-        "[DEFAULT BODY]",
+        '[DEFAULT BODY]',
         {
           project: this.config.project,
-          message: "This is a test message",
-          level: "<log | info | warn | error>",
+          message: 'This is a test message',
+          level: '<log | info | warn | error>',
           env: this.config.environment,
           timestamp: new Date().toISOString(),
         }

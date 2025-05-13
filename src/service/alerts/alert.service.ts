@@ -1,12 +1,12 @@
-import axios from "axios";
-import moment = require("moment");
-import { Alert } from "../../interfaces";
-import { AlertLevels, AlertTransports } from "../../enums";
-import { colorize } from "../../utils";
-import AlertVerification from "./verification.service";
+import axios from 'axios';
+import moment from 'moment';
+import { Alert } from '../../interfaces';
+import { AlertLevels, AlertTransports } from '../../enums';
+import { colorize } from '../../utils';
+import AlertVerification from './verification.service';
 
 class AlertService {
-  private activeTransport: string | null;
+  private readonly activeTransport: string | null;
   private config: Alert;
   constructor(config: Alert) {
     new AlertVerification(config).verify();
@@ -20,15 +20,15 @@ class AlertService {
   private getSlackColor(type: AlertLevels): string {
     switch (type) {
       case AlertLevels.INFO:
-        return "#3498db";
+        return '#3498db';
       case AlertLevels.SUCCESS:
-        return "#2ecc71";
+        return '#2ecc71';
       case AlertLevels.WARN:
-        return "#f1c40f";
+        return '#f1c40f';
       case AlertLevels.ERROR:
-        return "#e74c3c";
+        return '#e74c3c';
       default:
-        return "#3498db";
+        return '#3498db';
     }
   }
 
@@ -59,7 +59,7 @@ class AlertService {
       message,
       level: type,
       env: this.config.environment,
-      timestamp: moment().format("YYYY-MM-DD HH:mm:ss"),
+      timestamp: moment().format('YYYY-MM-DD HH:mm:ss'),
     };
 
     if (this.config.http!.body) {
@@ -72,7 +72,7 @@ class AlertService {
     }
     axios.post(this.config.http!.alertUrl, requestBody, {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         ...(this.config.http!.headers && this.config.http!.headers),
       },
     });
@@ -93,32 +93,32 @@ class AlertService {
     }
 
     const color = this.getSlackColor(type);
-    let requestBody = {
-      username: "Prosole Alerts",
-      icon_url: "https://i.imgur.com/ZhULocfs.png",
+    const requestBody = {
+      username: 'Prosole Alerts',
+      icon_url: 'https://i.imgur.com/ZhULocfs.png',
       text: `*[${type.toUpperCase()}]*\n${message}`,
       attachments: [
         {
           color,
           fields: [
             {
-              title: "Project",
+              title: 'Project',
               value: this.config.project.name,
               short: true,
             },
             {
-              title: "Version",
+              title: 'Version',
               value: this.config.project.version,
               short: true,
             },
             {
-              title: "Environment",
+              title: 'Environment',
               value: this.config.environment,
               short: true,
             },
             {
-              title: "Timestamp",
-              value: moment().format("YYYY-MM-DD HH:mm:ss"),
+              title: 'Timestamp',
+              value: moment().format('YYYY-MM-DD HH:mm:ss'),
               short: true,
             },
           ],
@@ -133,7 +133,7 @@ class AlertService {
     try {
       axios.post(url, requestBody, {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
     } catch (err) {

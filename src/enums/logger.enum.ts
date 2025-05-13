@@ -1,9 +1,9 @@
 enum LogLevels {
-  ERROR = "error",
-  SUCCESS = "success",
-  WARN = "warn",
-  INFO = "info",
-  LOG = "log",
+  ERROR = 'error',
+  SUCCESS = 'success',
+  WARN = 'warn',
+  INFO = 'info',
+  LOG = 'log',
 }
 
 enum LogLevelWeights {
@@ -15,19 +15,26 @@ enum LogLevelWeights {
 }
 
 enum LogTransports {
-  CONSOLE = "console",
-  FILE = "file",
-  STREAM = "stream",
-  SOCKETIO = "socketIO",
+  CONSOLE = 'console',
+  FILE = 'file',
+  STREAM = 'stream',
+  SOCKETIO = 'socketIO',
 }
 
 enum LogColors {
-  error = "\x1b[31m",
-  success = "\x1b[32m",
-  warn = "\x1b[33m",
-  info = "\x1b[34m",
-  log = "\x1b[37m",
-  reset = "\x1b[0m",
+  error = '\x1b[31m',
+  success = '\x1b[32m',
+  warn = '\x1b[33m',
+  info = '\x1b[34m',
+  log = '\x1b[37m',
+  reset = '\x1b[0m',
 }
 
-export { LogLevels, LogTransports, LogColors, LogLevelWeights };
+// tslint:disable-next-line:variable-name
+const ValidTemplateVariables = [
+    'timestamp',
+    'metadata',
+    'level'
+];
+
+export { LogLevels, LogTransports, LogColors, LogLevelWeights, ValidTemplateVariables };

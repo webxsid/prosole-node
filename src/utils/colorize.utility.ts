@@ -1,4 +1,4 @@
-import { LogColors } from "../enums";
+import { LogColors } from '../enums';
 
 export const colorize = {
   error: (message: string) => `${LogColors.error}${message}${LogColors.reset}`,

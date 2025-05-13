@@ -1,5 +1,3 @@
-import { LogTransports, LogLevels } from "../enums";
-
 interface Project {
   name: string;
   version?: string;
@@ -34,6 +32,13 @@ interface AlertSlack {
   [channel: string]: string;
 }
 
+interface TemplateArgs {
+  timestamp: string;
+  level: string;
+  metadata: string;
+}
+type Template = string | ((args: TemplateArgs) => string);
+
 interface Logger {
   project: Project;
   transport: string | null;
@@ -41,6 +46,7 @@ interface Logger {
   env: string;
   extendConsole?: boolean;
   file?: LogsFile;
+  template?: Template | null;
   stream?: LogsStream;
   socketIO?: LogsSocketIO;
 }

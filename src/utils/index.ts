@@ -1,1 +1,1 @@
-export * from "./colorize.utility";
+export * from './colorize.utility';

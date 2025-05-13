@@ -1,8 +1,7 @@
-import { Logger } from "../../interfaces/logger.interface";
-import LoggerService from "../../service/logs/log.service";
-import { defaultConfig } from "../../config/default.config";
-import { LogLevels } from "../../enums/logger.enum";
-import { colorize } from "../../utils";
+import { Logger } from '../../interfaces';
+import LoggerService from '../../service/logs/log.service';
+import { LogLevels } from '../../enums';
+import { colorize } from '../../utils';
 
 class LoggerClass {
   private instance: LoggerService | null = null;
@@ -19,7 +18,7 @@ class LoggerClass {
 
   public init(config: Logger): void {
     if (this.configured) {
-      console.log(colorize.warn("Logger is already configured"));
+      console.log(colorize.warn('Logger is already configured'));
       return;
     }
     this.instance = new LoggerService(config);
@@ -33,7 +32,7 @@ class LoggerClass {
   private sendToTransport(level: LogLevels, ...args: any[]): void {
     if (!this.instance) {
       console.log(
-        colorize.warn("Logger is not configured, please call logger.init()")
+        colorize.warn('Logger is not configured, please call logger.init()')
       );
       return;
     }

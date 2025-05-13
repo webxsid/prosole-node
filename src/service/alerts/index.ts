@@ -1,7 +1,7 @@
-import { Alert } from "../../interfaces";
-import AlertService from "./alert.service";
-import { AlertLevels } from "../../enums";
-import { colorize } from "../../utils";
+import { Alert } from '../../interfaces';
+import AlertService from './alert.service';
+import { AlertLevels } from '../../enums';
+import { colorize } from '../../utils';
 
 class AlertClass {
   private instance: AlertService | null = null;
@@ -19,7 +19,7 @@ class AlertClass {
 
   public init(config: Alert): void {
     if (this.configured) {
-      console.log(colorize.warn("Alerts are already configured"));
+      console.log(colorize.warn('Alerts are already configured'));
       return;
     }
     this.instance = new AlertService(config);
@@ -38,7 +38,7 @@ class AlertClass {
   ): void {
     if (!this.instance) {
       console.log(
-        colorize.warn("Alerts are not configured, please call alerts.init()")
+        colorize.warn('Alerts are not configured, please call alerts.init()')
       );
       return;
     }

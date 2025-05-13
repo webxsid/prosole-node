@@ -1,6 +1,7 @@
-import LoggerClass from "../src/service/logs";
-import { LogLevels, LogTransports } from "../src/enums/logger.enum";
+import LoggerClass from '../src/service/logs';
+import { LogLevels, LogTransports } from '../src/enums';
 
+// tslint:disable-next-line:variable-name
 const LoggerInstance = new LoggerClass();
 
 const logger = {

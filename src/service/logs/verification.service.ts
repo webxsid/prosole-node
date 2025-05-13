@@ -1,16 +1,9 @@
-//? node imports
-import * as fs from "fs";
-//? custom imports
+import * as fs from 'fs';
 import {
   Logger,
-  LogsFile,
-  LogsSocketIO,
-  LogsStream,
-  Project,
-} from "../../interfaces";
-import { LogTransports, LogLevelWeights, LogLevels } from "../../enums";
-import { colorize } from "../../utils";
-import { io, Socket } from "socket.io-client";
+} from '../../interfaces';
+import { LogTransports, LogLevelWeights, LogLevels } from '../../enums';
+import { colorize } from '../../utils';
 
 class LogVerification {
   private config: Logger;
@@ -37,7 +30,7 @@ class LogVerification {
     if (!transport) {
       console.log(
         colorize.info(
-          "Transport is not defined or null, nothing will be logged"
+          'Transport is not defined or null, nothing will be logged'
         )
       );
       this.config.transport = null;
@@ -58,7 +51,7 @@ class LogVerification {
     if (transport === LogTransports.STREAM) {
       console.log(
         colorize.warn(
-          "Stream transport is not supported yet, defaulting back to console"
+          'Stream transport is not supported yet, defaulting back to console'
         )
       );
       this.revertToConsole();
@@ -97,16 +90,16 @@ class LogVerification {
   private verifyProject(): void {
     const { project } = this.config;
     if (!project) {
-      throw new Error("Project is required");
+      throw new Error('Project is required');
     }
     if (!project.name) {
-      throw new Error("Project name is required");
+      throw new Error('Project name is required');
     }
     if (!project.version) {
       console.log(
-        colorize.warn("Project version is not defined, defaulting to 1.0.0")
+        colorize.warn('Project version is not defined, defaulting to 1.0.0')
       );
-      this.config.project.version = "1.0.0";
+      this.config.project.version = '1.0.0';
     }
   }
 
@@ -114,7 +107,7 @@ class LogVerification {
     const { baseLevel } = this.config;
     if (!baseLevel) {
       console.log(
-        colorize.warn("Base level is not defined, all logs will be logged")
+        colorize.warn('Base level is not defined, all logs will be logged')
       );
       this.config.baseLevel = LogLevels.LOG;
       return;
@@ -126,7 +119,7 @@ class LogVerification {
       this.config.baseLevel = LogLevels.LOG;
       return;
     }
-    const baseLevelInt = parseInt(LogLevelWeights[baseLevel as any]);
+    const baseLevelInt = parseInt(LogLevelWeights[baseLevel as any], 10);
     if (baseLevelInt < LogLevelWeights.LOG) {
       console.log(
         colorize.warn(`Base level ${baseLevel} is not valid, defaulting to LOG`)
@@ -157,7 +150,7 @@ class LogVerification {
     if (!file) {
       console.log(
         colorize.warn(
-          "File transport is not defined, defaulting back to console"
+          'File transport is not defined, defaulting back to console'
         )
       );
       this.revertToConsole();
@@ -168,14 +161,14 @@ class LogVerification {
     if (!directory) {
       console.log(
         colorize.warn(
-          "File directory is not defined, defaulting back to console"
+          'File directory is not defined, defaulting back to console'
         )
       );
       this.revertToConsole();
       return;
     }
     if (!this.isDirectoryValid(directory)) {
-      console.log(colorize.warn("Defaulting back to console"));
+      console.log(colorize.warn('Defaulting back to console'));
       this.revertToConsole();
       return;
     }
@@ -186,7 +179,7 @@ class LogVerification {
     if (!stream) {
       console.log(
         colorize.warn(
-          "Stream transport is not defined, defaulting back to console"
+          'Stream transport is not defined, defaulting back to console'
         )
       );
       this.revertToConsole();
@@ -196,7 +189,7 @@ class LogVerification {
     if (!projectId) {
       console.log(
         colorize.warn(
-          "Stream projectId is not defined, defaulting back to console"
+          'Stream projectId is not defined, defaulting back to console'
         )
       );
       this.revertToConsole();
@@ -206,7 +199,7 @@ class LogVerification {
     if (!secretKey) {
       console.log(
         colorize.warn(
-          "Stream secretKey is not defined, defaulting back to console"
+          'Stream secretKey is not defined, defaulting back to console'
         )
       );
       this.revertToConsole();
@@ -219,7 +212,7 @@ class LogVerification {
     if (!socketIO) {
       console.log(
         colorize.warn(
-          "SocketIO transport is not defined, defaulting back to console"
+          'SocketIO transport is not defined, defaulting back to console'
         )
       );
       this.revertToConsole();
@@ -229,7 +222,7 @@ class LogVerification {
     if (!baseUrl) {
       console.log(
         colorize.warn(
-          "SocketIO baseUrl is not defined, defaulting back to console"
+          'SocketIO baseUrl is not defined, defaulting back to console'
         )
       );
       this.revertToConsole();
@@ -238,21 +231,21 @@ class LogVerification {
     if (!events) {
       console.log(
         colorize.warn(
-          "SocketIO events are not defined, events will be emitted on the default log event - log"
+          'SocketIO events are not defined, events will be emitted on the default log event - log'
         )
       );
       this.config.socketIO!.events = {
-        log: "log",
+        log: 'log',
       };
       return;
     }
     if (!events.log) {
       console.log(
         colorize.warn(
-          "SocketIO log event is not defined, events will be emitted on the default log event - log"
+          'SocketIO log event is not defined, events will be emitted on the default log event - log'
         )
       );
-      this.config.socketIO!.events.log = "log";
+      this.config.socketIO!.events.log = 'log';
       return;
     }
   }

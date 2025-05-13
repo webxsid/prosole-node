@@ -1,2 +1,2 @@
-export * from "./alert.interface";
-export * from "./logger.interface";
+export * from './alert.interface';
+export * from './logger.interface';

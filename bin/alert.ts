@@ -1,7 +1,8 @@
-import AlertClass from "../src/service/alerts";
+import AlertClass from '../src/service/alerts';
 
-import { AlertTransports, AlertLevels } from "../src/enums/alert.enum";
+import { AlertTransports, AlertLevels } from '../src/enums';
 
+// tslint:disable-next-line:variable-name
 const AlertInstance = new AlertClass();
 
 const alerts = {

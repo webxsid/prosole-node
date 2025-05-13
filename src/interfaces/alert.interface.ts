@@ -1,4 +1,4 @@
-import { AlertTransports, AlertLevels } from "../enums";
+import { AlertTransports, AlertLevels } from '../enums';
 interface SlackAlert {
   channels: {
     [channel: string]: string;
@@ -18,7 +18,7 @@ interface ApiAlert {
   };
   healthCheck?: {
     path: string;
-    method: "GET" | "POST" | "PUT" | "DELETE";
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE';
   };
   body?: (
     type: AlertLevels,
